@@ -37,7 +37,7 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <div className='min-h-screen bg-white'>
+        <div className='min-h-screen bg-primary'>
             <section className='h-screen relative'>
                 <div className='absolute inset-0 z-0'>
                     {userLocation && (
@@ -83,13 +83,13 @@ export default function LandingPage() {
 
                     <div className="space-y-3">
                         <Link
-                        to="/register"
+                        to="/login"
                         className="block w-full bg-secondary text-white text-center py-3 rounded-lg font-semibold hover:bg-opacity-90 transition"
                         >
                         Are you a pet owner?
                         </Link>
                         <Link
-                        to="/register?type=vet"
+                        to="/login"
                         className="block w-full border-2 border-secondary text-secondary text-center py-3 rounded-lg font-semibold hover:bg-secondary hover:text-white transition"
                         >
                         Are you a veterinarian?
@@ -145,7 +145,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold text-center text-primary mb-12">
                     What Our Users Say
                 </h2>
-                <div className="grid md:grid-cols-3 gap-6"> // gerçemk kullanıcı yorumları çekilecek
+                <div className="grid md:grid-cols-3 gap-6"> {/* gerçek kullanıcı yorumları çekilecek */}
                     {[1, 2, 3].map((i) => (
                     <div key={i} className="bg-white p-6 rounded-lg shadow">
                         <div className="flex items-center mb-4">
@@ -158,7 +158,7 @@ export default function LandingPage() {
                         <p className="text-gray-600">
                         "Great platform! I was able to quickly book an appointment in emergencies."
                         </p>
-                        <div className="mt-3 text-yellow-500">★★★★★</div> // dinamik hale getirilebilir
+                        <div className="mt-3 text-yellow-500">★★★★★</div> {/* dinamik hale getirilebilir */}
                     </div>
                     ))}
                 </div>

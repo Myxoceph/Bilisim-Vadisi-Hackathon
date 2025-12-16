@@ -21,30 +21,35 @@ export function NavItem({ to, children }) {
 export default function Layout() {
   return (
       <div className="min-h-screen bg-primary flex flex-col">
-          <nav className="bg-gray-900 shadow-sm">
+          <nav>
               <div className="max-w-7xl mx-auto px-4">
-                  <div className="flex items-center justify-center space-x-8 h-16">
+                  <div className="flex items-center justify-center h-16">
 
+                      {/* 
                       <NavLink to="/" className="flex items-center">
                         <img src={logo} alt="Logo" className="h-10 w-auto" />
                       </NavLink>
+                      */}
 
-                      {/* <NavItem to="/">Dashboard</NavItem>
+                      {/*
+                      <NavItem to="/">Dashboard</NavItem>
                       <NavItem to="/calendar">Calendar</NavItem>
                       <NavItem to="/appointments">Appointments</NavItem>
                       <NavItem to="/waitlist">Waitlist</NavItem>
-                      <NavItem to="/chat">Chat</NavItem> */}
+                      <NavItem to="/chat">Chat</NavItem>
+                      */}
 
-                      <div className="w-10"></div>
-
-                      {/* Login/Register Butonları - Sağ */}
-                      <div className="flex items-center gap-4">
-                        <NavLink to="/login" className="text-white hover:text-secondary transition-colors">
+                      <div className="flex items-center justify-end gap-4">
+                        <NavLink
+                          to="/login"
+                          className="text-white hover:text-secondary transition-colors"
+                        >
                           Login
                         </NavLink>
+
                         <NavLink 
                           to="/register" 
-                          className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+                          className="bg-secondary text-white px-16 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
                         >
                           Register
                         </NavLink>
