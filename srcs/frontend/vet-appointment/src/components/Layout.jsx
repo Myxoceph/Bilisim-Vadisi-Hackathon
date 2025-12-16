@@ -25,18 +25,30 @@ export default function Layout() {
               <div className="max-w-7xl mx-auto px-4">
                   <div className="flex items-center justify-center space-x-8 h-16">
 
-                      <div className="flex items-center">
+                      <NavLink to="/" className="flex items-center">
                         <img src={logo} alt="Logo" className="h-10 w-auto" />
-                      </div>
+                      </NavLink>
 
-                      <NavItem to="/">Dashboard</NavItem>
+                      {/* <NavItem to="/">Dashboard</NavItem>
                       <NavItem to="/calendar">Calendar</NavItem>
                       <NavItem to="/appointments">Appointments</NavItem>
                       <NavItem to="/waitlist">Waitlist</NavItem>
-                      <NavItem to="/chat">Chat</NavItem>
+                      <NavItem to="/chat">Chat</NavItem> */}
 
                       <div className="w-10"></div>
 
+                      {/* Login/Register Butonları - Sağ */}
+                      <div className="flex items-center gap-4">
+                        <NavLink to="/login" className="text-white hover:text-secondary transition-colors">
+                          Login
+                        </NavLink>
+                        <NavLink 
+                          to="/register" 
+                          className="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+                        >
+                          Register
+                        </NavLink>
+                      </div>
                   </div>
               </div>
           </nav>
