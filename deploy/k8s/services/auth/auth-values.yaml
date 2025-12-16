@@ -15,7 +15,7 @@ image:
 
 service:
   name: auth-service
-  type: ClusterIP       #?
+  type: ClusterIP #?
   port: 80              # Cluster içindeki port
   targetPort: 5000      # Container portu
   protocol: TCP

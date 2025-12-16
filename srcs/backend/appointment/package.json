@@ -1,0 +1,12 @@
+{
+    "name": "appointment-backend",
+    "version": "1.0.0",
+    "description": "Backend service for managing appointments",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        
+    }
+}
