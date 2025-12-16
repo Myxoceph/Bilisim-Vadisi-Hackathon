@@ -1,0 +1,20 @@
+volumes:
+  gateway_src:
+   driver: local
+   driver_opts:
+     type: none
+     device: ./backend/gateway
+     o: bind
+
+
+services:
+  gateway:
+    container_name: gateway
+    build: ./backend/gateway
+    restart: on-failure
+    ports:
+      - "3001:3001"
+    volumes:
+      - gateway_src:/app
+      - /app/node_modules
+  
