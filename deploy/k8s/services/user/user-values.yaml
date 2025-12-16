@@ -1,0 +1,40 @@
+appName: user-service
+
+deployment:
+  name: user-service
+  labels:
+    app: user-service
+  replicas: 2
+  containerName: user-app
+  containerPort: 6000
+
+image:
+  repository: myrepo/user-service #!
+  tag: "v1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  name: user-service
+  type: ClusterIP
+  port: 80              # Cluster içi
+  targetPort: 6000      # Container portu
+  protocol: TCP
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  CPUTarget: 70
+  MemoryTarget: 80
+
+resources:
+  requests:
+    cpu: "150m"
+    memory: "128Mi"
+  limits:
+    cpu: "400m"
+    memory: "512Mi"
+
+# Environment variables (?)
+
+# Secrets (?)
