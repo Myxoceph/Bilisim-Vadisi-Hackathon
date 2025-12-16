@@ -1,0 +1,42 @@
+appName: auth-service
+
+deployment:
+  name: auth-service
+  labels:
+    app: auth-service
+  replicas: 2
+  containerName: auth-app
+  containerPort: 5000
+
+image:
+  repository: myrepo/auth-service
+  tag: "v1.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  name: auth-service
+  type: ClusterIP #?
+  port: 80              # Cluster içindeki port
+  targetPort: 5000      # Container portu
+  protocol: TCP
+
+hpa:
+  enabled: true
+  minReplicas: 3        
+  maxReplicas: 10
+  CPUTarget: 60
+  MemoryTarget: 80
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "64Mi"
+  limits:
+    cpu: "300m"
+    memory: "256Mi"
+
+env:
+  APP_ENV: production
+  LOG_LEVEL: info
+
+#secrets: (?)
