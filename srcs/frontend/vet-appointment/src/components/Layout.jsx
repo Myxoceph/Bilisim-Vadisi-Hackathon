@@ -21,44 +21,38 @@ export function NavItem({ to, children }) {
 export default function Layout() {
   return (
       <div className="min-h-screen bg-primary flex flex-col">
-          <nav>
-              <div className="max-w-7xl mx-auto px-4">
-                  <div className="flex items-center justify-center h-16">
+          <nav className="bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/10 sticky top-0 z-50">
+              <div className="max-w-7xl mx-auto px-6">
+                  <div className="flex items-center justify-between h-20">
 
-                      {/* 
-                      <NavLink to="/" className="flex items-center">
-                        <img src={logo} alt="Logo" className="h-10 w-auto" />
+                    <NavLink to="/" className="flex items-center group">
+                      <img 
+                        src={logo} 
+                        alt="Logo" 
+                        className="h-12 w-auto transition-transform group-hover:scale-105 duration-300" 
+                      />
+                    </NavLink>
+
+                    <div className="flex items-center gap-4">
+                      <NavLink
+                        to="/login"
+                        className="text-white/90 hover:text-white transition-all font-medium px-4 py-2 rounded-lg hover:bg-white/5"
+                      >
+                        Login
                       </NavLink>
-                      */}
 
-                      {/*
-                      <NavItem to="/">Dashboard</NavItem>
-                      <NavItem to="/calendar">Calendar</NavItem>
-                      <NavItem to="/appointments">Appointments</NavItem>
-                      <NavItem to="/waitlist">Waitlist</NavItem>
-                      <NavItem to="/chat">Chat</NavItem>
-                      */}
-
-                      <div className="flex items-center justify-end gap-4">
-                        <NavLink
-                          to="/login"
-                          className="text-white hover:text-secondary transition-colors"
-                        >
-                          Login
-                        </NavLink>
-
-                        <NavLink 
-                          to="/register" 
-                          className="bg-secondary text-white px-16 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
-                        >
-                          Register
-                        </NavLink>
-                      </div>
+                      <NavLink 
+                        to="/register" 
+                        className="bg-secondary text-white px-6 py-2.5 rounded-lg hover:bg-secondary/90 transition-all font-medium shadow-lg hover:shadow-xl hover:scale-105 duration-300"
+                      >
+                        Register
+                      </NavLink>
+                    </div>
                   </div>
               </div>
           </nav>
           
-          <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
+          <main className="flex-1 w-full">
               <Outlet />
           </main>
           

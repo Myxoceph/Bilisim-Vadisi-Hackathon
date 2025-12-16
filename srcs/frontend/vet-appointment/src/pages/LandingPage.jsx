@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import logo from '../assets/logo.webp';
 
 // Custom iconlar
 const userIcon = L.divIcon({
@@ -78,7 +79,7 @@ export default function LandingPage() {
                         Find the Nearest Veterinarian
                     </h1>
                     <p className="text-gray-600 mb-6">
-                        Book an appointment in seconds
+                        Book an appointment in seconds.
                     </p>
 
                     <div className="space-y-3">
@@ -140,7 +141,7 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            <section className="py-16">
+            <section className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
                 <h2 className="text-3xl font-bold text-center text-primary mb-12">
                     What Our Users Say

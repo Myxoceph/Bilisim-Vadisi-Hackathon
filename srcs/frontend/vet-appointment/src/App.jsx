@@ -19,10 +19,12 @@ function App() {
         <Routes>
 
           <Route path="/" element={<LandingPage />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           <Route element={<Layout />}>
+
             <Route 
               path="/dashboard" 
               element={
@@ -31,6 +33,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
             <Route 
               path="/calendar" 
               element={
@@ -39,6 +42,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
             <Route 
               path="/waitlist" 
               element={
@@ -47,6 +51,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
             <Route 
               path="/appointments" 
               element={
@@ -55,6 +60,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
             <Route 
               path="/chat" 
               element={
@@ -63,6 +69,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
