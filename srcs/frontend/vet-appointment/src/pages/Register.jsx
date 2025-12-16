@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
     const [userType, setUserType] = useState("customer");
@@ -10,15 +11,29 @@ export default function Register() {
         confirmPassword: '',
         phone: ''
     });
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const { register } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // API çağrısı eklenecek
-        console.log('Register:', { userType, ...formData });
+        setError('');
+        setLoading(true);
+
+        const result = await register({ ...formData, userType });
+
+        if (result.success)
+            navigate('/dashboard');
+        else
+            setError(result.error);
+
+        setLoading(false);
     };
 
     return (
@@ -28,6 +43,12 @@ export default function Register() {
             <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Register
             </h2>
+
+            {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+                {error}
+            </div>
+            )}
 
             <div className="flex gap-4 mb-6">
 
@@ -52,7 +73,6 @@ export default function Register() {
                     : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
                 }`}
             >
-
             Veterinarian
             </button>
 
@@ -137,9 +157,10 @@ export default function Register() {
 
             <button
                 type="submit"
-                className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all mt-6"
+                disabled={loading}
+                className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all mt-6 disabled:opacity-50"
             >
-            Register
+                {loading ? 'Loading...' : 'Register'}
             </button>
 
             </form>
