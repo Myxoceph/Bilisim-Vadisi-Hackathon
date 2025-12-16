@@ -1,0 +1,31 @@
+appName: nginx-service
+
+image:
+  repository: nginx
+  tag: latest #!
+  pullPolicy: IfNotPresent
+
+deployment:
+  name: nginx-deployment
+  labels:
+    app: nginx-app
+  replicas: 2
+  containerName: nginx-container
+  containerPort: 3131
+
+service:
+  name: nginx-service
+  type: LoadBalancer
+  port: 3131
+  targetPort: 3131
+
+resources: #?
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "250m"
+    memory: "256Mi"
+
+# env?
+# secrets?

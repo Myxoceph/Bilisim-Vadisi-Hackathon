@@ -5,7 +5,12 @@ volumes:
      type: none
      device: ./backend/gateway
      o: bind
-
+  nginx_src:
+   driver: local
+   driver_opts:
+     type: none
+     device: ../frontend/vet-appointment/dist
+     o: bind
 
 services:
   gateway:
@@ -17,4 +22,12 @@ services:
     volumes:
       - gateway_src:/app
       - /app/node_modules
-  
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: on-failure
+    ports:
+      - "3131:3131"
+    volumes:
+      - nginx_src:/usr/share/nginx/html

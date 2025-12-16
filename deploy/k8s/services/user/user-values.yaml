@@ -27,7 +27,7 @@ hpa:
   CPUTarget: 70
   MemoryTarget: 80
 
-resources:
+resources: #?
   requests:
     cpu: "150m"
     memory: "128Mi"
