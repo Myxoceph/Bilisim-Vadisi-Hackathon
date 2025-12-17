@@ -1,23 +1,6 @@
 import utils from './utils.js'
 
-/* import xss from 'xss'
-
-function sanitizeValue(v) {
-	if (typeof v === 'string') return xss(v)
-	if (Array.isArray(v)) return v.map(sanitizeValue)
-	if (v && typeof v === 'object') return sanitizeObject(v)
-	return v
-}
-
-function sanitizeObject(obj) {
-	const out = {}
-	for (const k of Object.keys(obj || {})) {
-		out[k] = sanitizeValue(obj[k])
-	}
-	return out
-}
- */
-async function processRequest(request, reply)
+async function processRequest(fastify, request, reply)
 {
 	const urlPath = request.url.split('/')[1];
 	const matchedServices = await utils.checkServiceLinks(fastify.services, urlPath);
@@ -28,9 +11,7 @@ async function processRequest(request, reply)
 	
 	const remainingPath = request.url.substring(urlPath.length + 1);
 	const fullUrl = matchedServices.url + remainingPath;
-	
-	console.log("Routing to:", fullUrl);
-	
+
 	try {
 		// Clean headers - remove problematic ones
 		const cleanHeaders = {};
@@ -47,7 +28,6 @@ async function processRequest(request, reply)
 			headers: cleanHeaders
 		};
 		
-		// Include body for methods that support it
 		if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
 			if (request.body) {
 				const bodyString = typeof request.body === 'string' 
@@ -71,7 +51,7 @@ async function processRequest(request, reply)
 	}
 }
 
-export async function gateway(fastify) {
+export async function proxy(fastify) {
 	fastify.route({
         method: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 		url: '/*',
