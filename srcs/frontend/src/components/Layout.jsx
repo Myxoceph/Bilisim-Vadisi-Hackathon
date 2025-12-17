@@ -47,26 +47,31 @@ export default function Layout() {
 
   return (
       <div className="min-h-screen bg-primary flex flex-col">
-          <nav className={`fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/10 transition-all duration-300 ${
-            showNavbar ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-          }`}>
+          <header>
+            <nav 
+              className={`fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/10 transition-all duration-300 ${
+                showNavbar ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+              }`}
+              aria-label="Main Navigation"
+            >
               <div className="max-w-7xl mx-auto px-6">
                   <div className="flex items-center justify-between h-20">
 
-                    <NavLink to="/" className="flex items-center group">
+                    <NavLink to="/" className="flex items-center group" aria-label="Ana sayfaya dön">
                       <img 
                         src={logo} 
-                        alt="Logo" 
+                        alt="Veterinary Appointment System Logo" 
                         className="h-12 w-auto transition-transform group-hover:scale-105 duration-300" 
                       />
                     </NavLink>
 
                     {/* Kullanıcı girişi yoksa - Login/Register */}
                     {!user && (
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4" role="navigation" aria-label="Kullanıcı işlemleri">
                         <NavLink
                           to="/login"
                           className="text-white/90 hover:text-white transition-all font-medium px-4 py-2 rounded-lg hover:bg-white/5"
+                          aria-label="Login"
                         >
                           Login
                         </NavLink>
@@ -74,6 +79,7 @@ export default function Layout() {
                         <NavLink 
                           to="/register" 
                           className="bg-secondary text-white px-6 py-2.5 rounded-lg hover:bg-secondary/90 transition-all font-medium shadow-lg hover:shadow-xl hover:scale-105 duration-300"
+                          aria-label="Register"
                         >
                           Register
                         </NavLink>
@@ -104,15 +110,17 @@ export default function Layout() {
                               <p className="text-sm text-gray-600">{user.email}</p>
                             </div>
                             
-                            <div className="py-2">
+                            <div className="py-2" role="group">
                               <button
                                 onClick={() => {
                                   navigate('/dashboard');
                                   setIsDropdownOpen(false);
                                 }}
                                 className="w-full px-4 py-2 text-left hover:bg-gray-50 transition-all flex items-center gap-3 text-gray-700"
+                                role="menuitem"
+                                aria-label="Go to the Dashboard page"
                               >
-                                <span className="text-xl">📊</span>
+                                <span className="text-xl" aria-hidden="true">📊</span>
                                 <span className="font-medium">Dashboard</span>
                               </button>
 
@@ -122,18 +130,22 @@ export default function Layout() {
                                   setIsDropdownOpen(false);
                                 }}
                                 className="w-full px-4 py-2 text-left hover:bg-gray-50 transition-all flex items-center gap-3 text-gray-700"
+                                role="menuitem"
+                                aria-label="Go to the calendar page"
                               >
-                                <span className="text-xl">📅</span>
+                                <span className="text-xl" aria-hidden="true">📅</span>
                                 <span className="font-medium">Calendar</span>
                               </button>
 
-                              <hr className="my-2" />
+                              <hr className="my-2" role="separator" />
 
                               <button
                                 onClick={handleLogout}
                                 className="w-full px-4 py-2 text-left hover:bg-red-50 transition-all flex items-center gap-3 text-red-600 font-medium"
+                                role="menuitem"
+                                aria-label="Logout"
                               >
-                                <span className="text-xl">🚪</span>
+                                <span className="text-xl" aria-hidden="true">🚪</span>
                                 <span>Sign Out</span>
                               </button>
                             </div>
@@ -143,13 +155,14 @@ export default function Layout() {
                     )}
                   </div>
               </div>
-          </nav>
+            </nav>
+          </header>
           
-          <main className="flex-1 w-full">
+          <main className="flex-1 w-full" role="main" id="main-content">
               <Outlet />
           </main>
           
-          <footer className="bg-gray-900 text-white py-6 mt-auto">
+          <footer className="bg-gray-900 text-white py-6 mt-auto" role="contentinfo">
               <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm">© 2025 Veteriner Randevu Sistemi</p>
               </div>

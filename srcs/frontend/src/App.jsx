@@ -1,22 +1,29 @@
+import { lazy, Suspense } from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 
 import Layout from "./components/Layout"
 import ProtectedRoute from "./components/ProtectedRoute"
-import LandingPage from "./pages/LandingPage"
-import Dashboard from "./pages/Dashboard"
-import Calendar from "./pages/Calendar"
-import Waitlist from "./pages/Waitlist"
-import Appointments from "./pages/Appointments"
-import Chat from "./pages/Chat"
+import PageLoader from "./components/PageLoader"
+
+// Eager loading - Hemen gerekli
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+
+// Lazy loading - Sayfa açılınca yüklenecek
+const LandingPage = lazy(() => import("./pages/LandingPage"))
+const Dashboard = lazy(() => import("./pages/Dashboard"))
+const Calendar = lazy(() => import("./pages/Calendar"))
+const Waitlist = lazy(() => import("./pages/Waitlist"))
+const Appointments = lazy(() => import("./pages/Appointments"))
+const Chat = lazy(() => import("./pages/Chat"))
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -75,6 +82,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   )
