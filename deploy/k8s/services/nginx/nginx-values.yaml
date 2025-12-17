@@ -13,22 +13,6 @@ service:
   type: LoadBalancer
   port: 3131
 
-livenessProbe:
-  httpGet:
-    path: /health
-    port: 3131
-    scheme: HTTPS
-  initialDelaySeconds: 10
-  periodSeconds: 10
-
-readinessProbe:
-  httpGet:
-    path: /health
-    port: 3131
-    scheme: HTTPS
-  initialDelaySeconds: 10
-  periodSeconds: 10
-
 autoscaling:
   enabled: false
 
