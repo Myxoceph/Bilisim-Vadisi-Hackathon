@@ -1,31 +1,24 @@
-appName: user-service
-
-deployment:
-  name: user-service
-  labels:
-    app: user-service
-  replicas: 2
-  containerName: user-app
-  containerPort: 6000
+# User Service Values
+replicaCount: 2
 
 image:
-  repository: myrepo/user-service #!
-  tag: "v1.0.0"
-  pullPolicy: IfNotPresent
+  repository: uby0/user-service
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "user-service"
 
 service:
-  name: user-service
   type: ClusterIP
-  port: 80              # Cluster içi
-  targetPort: 6000      # Container portu
-  protocol: TCP
+  port: 6000
 
-hpa:
+autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 10
-  CPUTarget: 70
-  MemoryTarget: 80
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
 
 resources:
   requests:

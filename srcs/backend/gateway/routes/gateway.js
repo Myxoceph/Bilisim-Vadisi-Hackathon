@@ -17,7 +17,7 @@ function sanitizeObject(obj) {
 	return out
 }
  */
-async function processRequest(fastify, request, reply)
+async function processRequest(request, reply)
 {
 	const urlPath = request.url.split('/')[1];
 	const matchedServices = await utils.checkServiceLinks(fastify.services, urlPath);

@@ -1,0 +1,44 @@
+# Nginx Service Values
+replicaCount: 2
+
+image:
+  repository: uby0/backend-nginx
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "nginx-service"
+
+service:
+  type: LoadBalancer
+  port: 3131
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 3131
+    scheme: HTTPS
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 3131
+    scheme: HTTPS
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+autoscaling:
+  enabled: false
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "250m"
+    memory: "256Mi"
+
+# env?
+# secrets?
