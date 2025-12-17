@@ -1,0 +1,33 @@
+# User Service Values
+replicaCount: 2
+
+image:
+  repository: uby0/user-service
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "user-service"
+
+service:
+  type: ClusterIP
+  port: 6000
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+resources:
+  requests:
+    cpu: "150m"
+    memory: "128Mi"
+  limits:
+    cpu: "400m"
+    memory: "512Mi"
+
+# Environment variables (?)
+
+# Secrets (?)

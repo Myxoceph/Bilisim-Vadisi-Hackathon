@@ -1,0 +1,35 @@
+# Gateway Service Values
+replicaCount: 2
+
+image:
+  repository: uby0/backend-gateway
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "gateway-service"
+
+service:
+  type: ClusterIP
+  port: 3001
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+resources:
+  requests:
+    cpu: "200m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+# env:
+#   APP_ENV: production
+#   LOG_LEVEL: info
+#   AUTH_SERVICE_URL: http://auth-service:80
+#   RATE_LIMIT: "100"

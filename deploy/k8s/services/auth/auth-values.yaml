@@ -1,0 +1,35 @@
+# Auth Service Values
+replicaCount: 2
+
+image:
+  repository: uby0/auth-service
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "auth-service"
+
+service:
+  type: ClusterIP
+  port: 5000
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 80
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "64Mi"
+  limits:
+    cpu: "300m"
+    memory: "256Mi"
+
+# env:
+#   APP_ENV: production
+#   LOG_LEVEL: info
+
+# secrets: (?)
