@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext"
 import Layout from "./components/Layout"
 import ProtectedRoute from "./components/ProtectedRoute"
 import LandingPage from "./pages/LandingPage"
+import Dashboard from "./pages/Dashboard"
 import Calendar from "./pages/Calendar"
 import Waitlist from "./pages/Waitlist"
 import Appointments from "./pages/Appointments"
@@ -23,6 +24,15 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route element={<Layout />}>
+
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
 
             <Route 
               path="/calendar" 
