@@ -19,6 +19,40 @@ export async function userRoutes(fastify, options) {
   );
 
   fastify.post(
+    "/logout",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["refreshToken"],
+          properties: {
+            refreshToken: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.logoutUser
+  );
+
+  // Test endpoint - kısa süreli token
+  fastify.post(
+    "/test/short-token",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string" },
+            password: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.getShortLivedToken
+  );
+
+  fastify.post(
     "/users",
     {
       schema: {
@@ -54,6 +88,7 @@ export async function userRoutes(fastify, options) {
   fastify.get(
     "/users/:id",
     {
+      onRequest: [fastify.authenticate],
       schema: {
         params: {
           type: "object",

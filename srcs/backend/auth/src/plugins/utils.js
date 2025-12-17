@@ -1,10 +1,12 @@
+import { errorResponse, validationErrorResponse } from "../utils/responseFormatter.js";
+
 async function NotFoundHandler(request, reply) {
-  reply.status(404).send({
-    success: false,
-    error: "Route not found",
-    path: request.url,
-    service: "authentication-service",
-  });
+  reply.status(404).send(
+    errorResponse("Route not found", {
+      path: request.url,
+      service: "authentication-service",
+    })
+  );
 }
 
 async function InternalServerErrorHandler(error, request, reply) {
@@ -24,18 +26,14 @@ async function InternalServerErrorHandler(error, request, reply) {
       };
     });
 
-    return reply.status(400).send({
-      success: false,
-      error: "Validation failed",
-      errors: errors,
-    });
+    return reply.status(400).send(validationErrorResponse(errors));
   }
 
-  reply.status(error.statusCode || 500).send({
-    success: false,
-    error: error.statusCode === 500 ? "Internal server error" : error.message,
-    message: error.message,
-  });
+  reply.status(error.statusCode || 500).send(
+    errorResponse(
+      error.statusCode === 500 ? "Internal server error" : error.message
+    )
+  );
 }
 
 export default {

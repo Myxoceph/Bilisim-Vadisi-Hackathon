@@ -50,7 +50,7 @@ async function processRequest(fastify, request, reply) {
 
     return reply.code(response.status).send(responseData);
   } catch (error) {
-    console.error("Fetch error:", error.message);
+    request.log.error({ error: error.message }, "Fetch error");
     return reply.code(503).send({
       error: `Service unavailable: ${error.message}`,
     });

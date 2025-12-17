@@ -2,7 +2,7 @@ import tokenController from "../../controllers/token/tokenController.js";
 
 async function tokenRoutes(fastify, options) {
   fastify.post(
-    "/tokens",
+    "/token/refresh",
     {
       schema: {
         body: {
@@ -14,7 +14,8 @@ async function tokenRoutes(fastify, options) {
         },
       },
     },
-    tokenController.refreshTokenToken
+    tokenController.refreshToken
   );
 }
+
 export default tokenRoutes;

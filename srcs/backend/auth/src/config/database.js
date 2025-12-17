@@ -7,12 +7,21 @@ const sequelize = new Sequelize({
   username: process.env.DB_USER || "admin",
   password: process.env.DB_PASSWORD || "adminpassword",
   database: process.env.DB_NAME || "auth_db",
-  logging: console.log,
+  logging: process.env.NODE_ENV === "production" ? false : console.log,
   pool: {
-    max: 5,
-    min: 0,
+    max: 10, // Increased from 5 for better concurrency
+    min: 2, // Keep minimum connections ready
     acquire: 30000,
     idle: 10000,
+  },
+  define: {
+    timestamps: true,
+    underscored: false,
+  },
+  benchmark: process.env.NODE_ENV !== "production",
+  logQueryParameters: process.env.NODE_ENV !== "production",
+  retry: {
+    max: 3,
   },
 });
 

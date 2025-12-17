@@ -1,22 +1,5 @@
 import utils from "./utils.js";
 
-/* import xss from 'xss'
-
-function sanitizeValue(v) {
-	if (typeof v === 'string') return xss(v)
-	if (Array.isArray(v)) return v.map(sanitizeValue)
-	if (v && typeof v === 'object') return sanitizeObject(v)
-	return v
-}
-
-function sanitizeObject(obj) {
-	const out = {}
-	for (const k of Object.keys(obj || {})) {
-		out[k] = sanitizeValue(obj[k])
-	}
-	return out
-}
- */
 async function processRequest(fastify, request, reply) {
   const urlPath = request.url.split("/")[1];
   const matchedServices = await utils.checkServiceLinks(
@@ -31,10 +14,9 @@ async function processRequest(fastify, request, reply) {
   const remainingPath = request.url.substring(urlPath.length + 1);
   const fullUrl = matchedServices.url + remainingPath;
 
-  console.log("Routing to:", fullUrl);
+  request.log.info({ url: fullUrl }, "Routing request to service");
 
   try {
-    // Clean headers - remove problematic ones
     const cleanHeaders = {};
     const skipHeaders = [
       "host",
@@ -72,7 +54,7 @@ async function processRequest(fastify, request, reply) {
 
     return reply.code(response.status).send(responseData);
   } catch (error) {
-    console.error("Fetch error:", error.message);
+    request.log.error({ error: error.message }, "Service fetch error");
     return reply.code(503).send({
       error: `Service unavailable: ${error.message}`,
     });
