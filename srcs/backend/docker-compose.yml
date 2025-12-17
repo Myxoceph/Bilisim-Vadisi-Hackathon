@@ -5,6 +5,12 @@ volumes:
      type: none
      device: ./gateway
      o: bind
+  auth_src:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./auth
+      o: bind
   nginx_src:
    driver: local
    driver_opts:
@@ -13,6 +19,10 @@ volumes:
      o: bind
   pgdata: 
   redis_data:
+
+networks:
+  backend_network:
+    driver: bridge
 
 services:
   postgres:
@@ -93,6 +103,8 @@ services:
       - "443:443"
     depends_on:
       - gateway
+    networks:
+      - backend_network
 
 #  user:
 #    container_name: user

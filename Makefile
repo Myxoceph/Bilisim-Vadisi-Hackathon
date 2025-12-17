@@ -1,4 +1,4 @@
-FRONTEND_DIR = ./srcs/frontend/vet-appointment
+FRONTEND_DIR = ./srcs/frontend
 BACKEND_DIR = ./srcs/backend
 
 # Colors
