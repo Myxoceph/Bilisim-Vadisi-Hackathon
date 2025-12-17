@@ -15,9 +15,46 @@ volumes:
      type: none
      device: ./auth
      o: bind
-
+  pgdata: 
+  redis_data:
 
 services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: auth_db
+    expose:
+      - "5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d auth_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   gateway:
     container_name: gateway
     build: ./gateway
@@ -29,34 +66,59 @@ services:
       - /app/node_modules
     networks:
       - backend_network
+    depends_on:
+      - auth
 
-#  appointment:
-#    container_name: appointment
-#    build: ./appointment
-#    restart: on-failure
-#    expose:
-#      - "3001:3001"
-#    networks:
-#      - backend_network
-#  
   auth:
     container_name: auth
     build: ./auth
     restart: on-failure
     expose:
-      - 3002
+      - "3002" 
     networks:
       - backend_network
     volumes:
       - auth_src:/app
       - /app/node_modules
-    
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://admin:adminpassword@postgres:5432/auth_db
+      REDIS_URL: redis://redis:6379
+
 #  user:
 #    container_name: user
 #    build: ./user
 #    restart: on-failure
 #    expose:
-#      - "3003:3003"
+#      - "3003"
 #    networks:
 #      - backend_network
-  
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      redis:
+#        condition: service_healthy
+#    environment:
+#      DATABASE_URL: postgresql://admin:adminpassword@postgres:5432/auth_db
+#      REDIS_URL: redis://redis:6379
+#
+#  appointment:
+#    container_name: appointment
+#    build: ./appointment
+#    restart: on-failure
+#    expose:
+#      - "3001"
+#    networks:
+#      - backend_network
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      redis:
+#        condition: service_healthy
+#    environment:
+#      DATABASE_URL: postgresql://admin:adminpassword@postgres:5432/auth_db
+#      REDIS_URL: redis://redis:6379

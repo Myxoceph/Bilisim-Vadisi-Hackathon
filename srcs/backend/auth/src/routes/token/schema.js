@@ -1,19 +1,20 @@
-import tokenController from '../../controllers/token/controller.js';
+import tokenController from "../../controllers/token/tokenController.js";
 
 async function tokenRoutes(fastify, options) {
-    fastify.post(
-        '/tokens',
-        {
-            schema: {
-                body: {
-                    type: 'object',
-                    required: ['refreshToken'],
-                    properties: {
-                        refreshToken: { type: 'string' },
-                    },
-                },
-            },
+  fastify.post(
+    "/tokens",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["refreshToken"],
+          properties: {
+            refreshToken: { type: "string" },
+          },
         },
-        tokenController.refreshTokenToken
-    );   
+      },
+    },
+    tokenController.refreshTokenToken
+  );
 }
+export default tokenRoutes;

@@ -2,16 +2,34 @@ import userController from "../../controllers/users/userController.js";
 
 export async function userRoutes(fastify, options) {
   fastify.post(
+    "/login",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string" },
+            password: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.loginUser
+  );
+
+  fastify.post(
     "/users",
     {
       schema: {
         body: {
           type: "object",
-          required: ["username", "email", "password"],
+          required: ["fullname", "email", "phonenumber", "password"],
           properties: {
-            username: { type: "string" },
-            email: { type: "string" } ,
-            password: { type: "string"},
+            fullname: { type: "string" },
+            email: { type: "string" },
+            phonenumber: { type: "string" },
+            password: { type: "string" },
           },
         },
       },
@@ -73,4 +91,4 @@ export async function userRoutes(fastify, options) {
   );
 }
 
-export default userRoutes;  
+export default userRoutes;
