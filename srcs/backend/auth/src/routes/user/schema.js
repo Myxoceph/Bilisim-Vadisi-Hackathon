@@ -2,16 +2,68 @@ import userController from "../../controllers/users/userController.js";
 
 export async function userRoutes(fastify, options) {
   fastify.post(
+    "/login",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string" },
+            password: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.loginUser
+  );
+
+  fastify.post(
+    "/logout",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["refreshToken"],
+          properties: {
+            refreshToken: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.logoutUser
+  );
+
+  // Test endpoint - kısa süreli token
+  fastify.post(
+    "/test/short-token",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string" },
+            password: { type: "string" },
+          },
+        },
+      },
+    },
+    userController.getShortLivedToken
+  );
+
+  fastify.post(
     "/users",
     {
       schema: {
         body: {
           type: "object",
-          required: ["username", "email", "password"],
+          required: ["fullname", "email", "phonenumber", "password"],
           properties: {
-            username: { type: "string" },
-            email: { type: "string" } ,
-            password: { type: "string"},
+            fullname: { type: "string" },
+            email: { type: "string" },
+            phonenumber: { type: "string" },
+            password: { type: "string" },
           },
         },
       },
@@ -36,6 +88,7 @@ export async function userRoutes(fastify, options) {
   fastify.get(
     "/users/:id",
     {
+      onRequest: [fastify.authenticate],
       schema: {
         params: {
           type: "object",
@@ -73,4 +126,4 @@ export async function userRoutes(fastify, options) {
   );
 }
 
-export default userRoutes;  
+export default userRoutes;
