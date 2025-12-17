@@ -1,0 +1,14 @@
+{
+    "appointment": {
+        "url": "http://appointment:3001",
+        "timeout": 5000
+    },
+    "auth": {
+        "url": "http://auth:3002",
+        "timeout": 5000
+    },
+    "user": {
+        "url": "http://user:3003",
+        "timeout": 5000
+    }
+}

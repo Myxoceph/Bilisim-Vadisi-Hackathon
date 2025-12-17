@@ -1,0 +1,62 @@
+networks:
+  backend_network:
+    driver: bridge
+
+volumes:
+  gateway_src:
+   driver: local
+   driver_opts:
+     type: none
+     device: ./gateway
+     o: bind
+  auth_src:
+   driver: local
+   driver_opts:
+     type: none
+     device: ./auth
+     o: bind
+
+
+services:
+  gateway:
+    container_name: gateway
+    build: ./gateway
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - gateway_src:/app
+      - /app/node_modules
+    networks:
+      - backend_network
+
+#  appointment:
+#    container_name: appointment
+#    build: ./appointment
+#    restart: on-failure
+#    expose:
+#      - "3001:3001"
+#    networks:
+#      - backend_network
+#  
+  auth:
+    container_name: auth
+    build: ./auth
+    restart: on-failure
+    expose:
+      - 3002
+    networks:
+      - backend_network
+    volumes:
+      - auth_src:/app
+      - /app/node_modules
+    
+#  user:
+#    container_name: user
+#    build: ./user
+#    restart: on-failure
+#    expose:
+#      - "3003:3003"
+#    networks:
+#      - backend_network
+  
