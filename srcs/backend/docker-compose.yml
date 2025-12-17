@@ -15,7 +15,7 @@ volumes:
    driver: local
    driver_opts:
      type: none
-     device: ../frontend/vet-appointment/dist
+     device: ../frontend/dist
      o: bind
   pgdata: 
   redis_data:
@@ -105,6 +105,8 @@ services:
       - gateway
     networks:
       - backend_network
+    volumes:
+      - nginx_src:/usr/share/nginx/html
 
 #  user:
 #    container_name: user
