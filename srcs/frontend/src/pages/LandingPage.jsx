@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import logo from '../assets/logo.webp';
 
 // Custom iconlar
 const userIcon = L.divIcon({
@@ -38,7 +37,7 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <div className='min-h-screen bg-primary'>
+        <div className='min-h-screen bg-primary'>  
             <section className='h-screen relative'>
                 <div className='absolute inset-0 z-0'>
                     {userLocation && (
