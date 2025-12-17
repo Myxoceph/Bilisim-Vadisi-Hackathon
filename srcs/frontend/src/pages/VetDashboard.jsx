@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import DashboardLayout from '../components/dashboard/DashboardLayout';
-import StatCard from '../components/dashboard/StatCard';
-import AppointmentCard from '../components/dashboard/AppointmentCard';
+import { Link } from "react-router-dom";
+import DashboardLayout from "../components/dashboard/DashboardLayout";
+import StatCard from "../components/dashboard/StatCard";
+import AppointmentCard from "../components/dashboard/AppointmentCard";
 
 export default function VetDashboard() {
   // Mock data - Backend'den gelecek
@@ -9,14 +9,42 @@ export default function VetDashboard() {
     todayAppointments: 8,
     totalPatients: 124,
     pendingRequests: 3,
-    monthlyRevenue: '₺12,450',
+    monthlyRevenue: "₺12,450",
   };
 
   const todayAppointments = [
-    { id: 1, time: '09:00', petName: 'Max', ownerName: 'Ahmet Yılmaz', type: 'Routine Checkup', status: 'confirmed' },
-    { id: 2, time: '10:30', petName: 'Luna', ownerName: 'Ayşe Demir', type: 'Vaccination', status: 'confirmed' },
-    { id: 3, time: '11:00', petName: 'Charlie', ownerName: 'Mehmet Kaya', type: 'Emergency', status: 'pending' },
-    { id: 4, time: '14:00', petName: 'Bella', ownerName: 'Fatma Özkan', type: 'Surgery', status: 'confirmed' },
+    {
+      id: 1,
+      time: "09:00",
+      petName: "Max",
+      ownerName: "Ahmet Yılmaz",
+      type: "Routine Checkup",
+      status: "confirmed",
+    },
+    {
+      id: 2,
+      time: "10:30",
+      petName: "Luna",
+      ownerName: "Ayşe Demir",
+      type: "Vaccination",
+      status: "confirmed",
+    },
+    {
+      id: 3,
+      time: "11:00",
+      petName: "Charlie",
+      ownerName: "Mehmet Kaya",
+      type: "Emergency",
+      status: "pending",
+    },
+    {
+      id: 4,
+      time: "14:00",
+      petName: "Bella",
+      ownerName: "Fatma Özkan",
+      type: "Surgery",
+      status: "confirmed",
+    },
   ];
 
   const actions = (
@@ -37,12 +65,11 @@ export default function VetDashboard() {
   );
 
   return (
-    <DashboardLayout 
-      title="Veterinarian Dashboard" 
+    <DashboardLayout
+      title="Veterinarian Dashboard"
       subtitle="Manage your clinic and appointments"
       actions={actions}
     >
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Today's Appointments"
@@ -76,9 +103,16 @@ export default function VetDashboard() {
       <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">Today's Schedule</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+              Today's Schedule
+            </h2>
             <p className="text-gray-600 text-sm mt-1">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
           </div>
           <Link
@@ -97,7 +131,9 @@ export default function VetDashboard() {
 
         {todayAppointments.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No appointments scheduled for today</p>
+            <p className="text-gray-400 text-lg">
+              No appointments scheduled for today
+            </p>
           </div>
         )}
       </div>
@@ -109,7 +145,9 @@ export default function VetDashboard() {
         >
           <div className="text-4xl mb-3">📋</div>
           <h3 className="font-bold text-lg text-gray-800 mb-2">Waitlist</h3>
-          <p className="text-sm text-gray-600">Manage pending appointment requests</p>
+          <p className="text-sm text-gray-600">
+            Manage pending appointment requests
+          </p>
         </Link>
 
         <Link
@@ -117,8 +155,12 @@ export default function VetDashboard() {
           className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-xl p-6 hover:shadow-lg transition-all group"
         >
           <div className="text-4xl mb-3">🏥</div>
-          <h3 className="font-bold text-lg text-gray-800 mb-2">Patient Records</h3>
-          <p className="text-sm text-gray-600">View and update patient information</p>
+          <h3 className="font-bold text-lg text-gray-800 mb-2">
+            Patient Records
+          </h3>
+          <p className="text-sm text-gray-600">
+            View and update patient information
+          </p>
         </Link>
 
         <Link
@@ -130,7 +172,6 @@ export default function VetDashboard() {
           <p className="text-sm text-gray-600">Chat with pet owners</p>
         </Link>
       </div>
-
     </DashboardLayout>
   );
 }
