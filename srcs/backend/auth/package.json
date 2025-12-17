@@ -1,5 +1,5 @@
 {
-  "name": "gateway",
+  "name": "auth",
   "type": "module",
   "scripts": {
     "start": "node ./src/app.js",
@@ -9,11 +9,12 @@
     "@fastify/cookie": "^9.0.0",
     "@fastify/helmet": "^11.1.1",
     "@fastify/jwt": "^8.0.0",
-    "@fastify/multipart": "^8.0.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "fastify": "^4.29.1",
-    "fastify-plugin": "^4.5.1",
-    "xss": "^1.0.0"
+    "sequelize": "^6.32.1",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
