@@ -1,3 +1,7 @@
+networks:
+  backend_network:
+    driver: bridge
+
 volumes:
   gateway_src:
    driver: local
@@ -11,6 +15,12 @@ volumes:
      type: none
      device: ../frontend/vet-appointment/dist
      o: bind
+  auth_src:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./auth
+      o: bind
   pgdata: 
   redis_data:
 
