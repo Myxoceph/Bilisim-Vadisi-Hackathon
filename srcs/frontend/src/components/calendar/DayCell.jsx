@@ -7,11 +7,12 @@ export default function DayCell({
       onClick
 }) {
 
-  const appointmentCount = appointments.length;
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const appointmentCount = safeAppointments.length;
 
   return (
     <button
-      onClick={() => onClick(day, appointments)}
+      onClick={() => onClick(day, safeAppointments)}
       disabled={!isCurrentMonth}
       className={`
         min-h-28 p-2 border rounded-lg transition-all
@@ -38,7 +39,7 @@ export default function DayCell({
 
       {isCurrentMonth && (
         <div className="space-y-1">
-          {appointments.slice(0, 2).map((apt, idx) => (
+          {safeAppointments.slice(0, 2).map((apt, idx) => (
             <div
               key={idx}
               className={`text-xs px-2 py-1 rounded truncate text-left ${
