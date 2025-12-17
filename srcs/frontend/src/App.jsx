@@ -18,12 +18,12 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          <Route path="/" element={<LandingPage />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           <Route element={<Layout />}>
+
+            <Route path="/" element={<LandingPage />} />
 
             <Route 
               path="/dashboard" 

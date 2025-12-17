@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Outlet, NavLink, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import logo from '../assets/logo.webp';
 
@@ -24,6 +24,20 @@ export default function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowNavbar(true);
+      } else {
+        setShowNavbar(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -33,7 +47,9 @@ export default function Layout() {
 
   return (
       <div className="min-h-screen bg-primary flex flex-col">
-          <nav className="bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/10 sticky top-0 z-50">
+          <nav className={`fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md shadow-lg border-b border-white/10 transition-all duration-300 ${
+            showNavbar ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+          }`}>
               <div className="max-w-7xl mx-auto px-6">
                   <div className="flex items-center justify-between h-20">
 
