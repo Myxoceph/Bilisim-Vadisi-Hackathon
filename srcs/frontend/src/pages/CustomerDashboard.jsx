@@ -5,21 +5,14 @@ import AppointmentCard from '../components/dashboard/AppointmentCard';
 
 export default function CustomerDashboard() {
   const stats = {
-    upcomingAppointments: 2,
-    totalVisits: 15,
-    favoriteClinics: 3,
+    upcomingAppointments: 0,
+    totalVisits: 0,
+    favoriteClinics: 0,
   };
 
-  const upcomingAppointments = [
-    { id: 1, time: '14:00', petName: 'Max', ownerName: 'Dr. Ahmet Bakırca', type: 'Routine Checkup', status: 'confirmed' },
-    { id: 2, time: '10:30', petName: 'Luna', ownerName: 'Dr. Ayşe Demir', type: 'Vaccination', status: 'pending' },
-  ];
+  const upcomingAppointments = [];
 
-  const favoriteClinics = [
-    { id: 1, name: 'Happy Paws Clinic', rating: 4.8, distance: '1.2 km' },
-    { id: 2, name: 'Pet Care Center', rating: 4.9, distance: '2.5 km' },
-    { id: 3, name: 'Animal Hospital', rating: 4.7, distance: '3.1 km' },
-  ];
+  const favoriteClinics = [];
 
   const actions = (
     <Link

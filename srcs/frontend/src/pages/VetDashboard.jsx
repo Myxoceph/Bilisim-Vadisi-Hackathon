@@ -4,20 +4,15 @@ import StatCard from '../components/dashboard/StatCard';
 import AppointmentCard from '../components/dashboard/AppointmentCard';
 
 export default function VetDashboard() {
-  // Mock data - Backend'den gelecek
+  // Backend'den gelecek
   const stats = {
-    todayAppointments: 8,
-    totalPatients: 124,
-    pendingRequests: 3,
-    monthlyRevenue: '₺12,450',
+    todayAppointments: 0,
+    totalPatients: 0,
+    pendingRequests: 0,
+    monthlyRevenue: '₺0',
   };
 
-  const todayAppointments = [
-    { id: 1, time: '09:00', petName: 'Max', ownerName: 'Ahmet Yılmaz', type: 'Routine Checkup', status: 'confirmed' },
-    { id: 2, time: '10:30', petName: 'Luna', ownerName: 'Ayşe Demir', type: 'Vaccination', status: 'confirmed' },
-    { id: 3, time: '11:00', petName: 'Charlie', ownerName: 'Mehmet Kaya', type: 'Emergency', status: 'pending' },
-    { id: 4, time: '14:00', petName: 'Bella', ownerName: 'Fatma Özkan', type: 'Surgery', status: 'confirmed' },
-  ];
+  const todayAppointments = [];
 
   const actions = (
     <>

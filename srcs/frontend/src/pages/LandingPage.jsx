@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Custom iconlar
 const userIcon = L.divIcon({
     className: 'custom-icon',
     html: '<div style="font-size: 32px;">👤</div>',
@@ -20,6 +20,7 @@ const clinicIcon = L.divIcon({
 });
 
 export default function LandingPage() {
+    const { user } = useAuth();
     const [userLocation, setUserLocation] = useState(null);
     const [nearbyVets, setNearbyVets] = useState([]);
 
@@ -63,9 +64,13 @@ export default function LandingPage() {
                                 <div className="p-2">
                                 <h3 className="font-bold">{vet.name}</h3>
                                 <p className="text-sm text-green-600">✓ Appointment Available</p>
-                                <button className="mt-2 bg-secondary text-white px-3 py-1 rounded text-sm">
+                                <Link 
+                                    to={user ? "/calendar" : "/register"} 
+                                    className="mt-2 bg-white text-white px-3 py-1 rounded text-sm inline-block hover:bg-secondary/90 transition-colors"
+                                    aria-label={user ? "Schedule an appointment" : "Register and book an appointment"}
+                                >
                                     Book Appointment
-                                </button>
+                                </Link>
                                 </div>
                             </Popup>
                             </Marker>
@@ -74,7 +79,6 @@ export default function LandingPage() {
                     )}
                 </div>
 
-                {/* Left Panel - Glassmorphism Style */}
                 <div className="absolute top-0 left-0 h-full w-96 bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-md shadow-2xl p-8 z-10 border-r border-gray-200/50">
                     <div className="animate-fade-in">
                         <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4 leading-tight">
