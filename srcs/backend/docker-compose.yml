@@ -1,7 +1,3 @@
-networks:
-  backend_network:
-    driver: bridge
-
 volumes:
   gateway_src:
    driver: local
@@ -9,11 +5,11 @@ volumes:
      type: none
      device: ./gateway
      o: bind
-  auth_src:
+  nginx_src:
    driver: local
    driver_opts:
      type: none
-     device: ./auth
+     device: ../frontend/vet-appointment/dist
      o: bind
   pgdata: 
   redis_data:
@@ -60,7 +56,7 @@ services:
     build: ./gateway
     restart: on-failure
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - gateway_src:/app
       - /app/node_modules

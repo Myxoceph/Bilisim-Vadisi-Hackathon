@@ -1,8 +1,22 @@
-export default function CalendarHeader({ currentDate, onPrevMonth, onNextMonth, onToday }){
-
+export default function CalendarHeader({
+  currentDate,
+  onPrevMonth,
+  onNextMonth,
+  onToday,
+}) {
   const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const month = monthNames[currentDate.getMonth()];
@@ -15,7 +29,7 @@ export default function CalendarHeader({ currentDate, onPrevMonth, onNextMonth, 
           {month} {year}
         </h2>
         <p className="text-sm text-gray-600 mt-1">
-          {currentDate.toLocaleDateString('en-US', { weekday: 'long' })}
+          {currentDate.toLocaleDateString("en-US", { weekday: "long" })}
         </p>
       </div>
 
@@ -26,25 +40,45 @@ export default function CalendarHeader({ currentDate, onPrevMonth, onNextMonth, 
         >
           Today
         </button>
-        
+
         <div className="flex items-center gap-2">
           <button
             onClick={onPrevMonth}
             className="p-2 hover:bg-gray-100 rounded-lg transition-all"
             aria-label="Previous month"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
-          
+
           <button
             onClick={onNextMonth}
             className="p-2 hover:bg-gray-100 rounded-lg transition-all"
             aria-label="Next month"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         </div>

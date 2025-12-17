@@ -1,26 +1,23 @@
 const STORAGE_KEYS = {
-  USERS         : 'vet_app_users',
-  CURRENT_USER  : 'vet_app_current_user',
+  USERS: "vet_app_users",
+  CURRENT_USER: "vet_app_current_user",
 };
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const authService = {
-
-  async register(userData)
-  {
+  async register(userData) {
     await delay(500); // API simülasyonu
 
     const users = this.getAllUsers();
 
-    if (users.find(u => u.email === userData.email))
-      throw new Error('This email is already registered');
+    if (users.find((u) => u.email === userData.email))
+      throw new Error("This email is already registered");
 
     if (userData.password !== userData.confirmPassword)
-      throw new Error('Passwords do not match');
+      throw new Error("Passwords do not match");
 
-    const newUser =
-    {
+    const newUser = {
       id: Date.now().toString(),
       name: userData.name,
       email: userData.email,
@@ -37,44 +34,38 @@ export const authService = {
     return newUser;
   },
 
-  async login(email, password)
-  {
+  async login(email, password) {
     await delay(500); // API simülasyonu
 
     const users = this.getAllUsers();
-    const user = users.find(u => u.email === email);
+    const user = users.find((u) => u.email === email);
 
-    if (!user)
-      throw new Error('User not found');
+    if (!user) throw new Error("User not found");
 
     // Mock: Şifre kontrolü (hash kontrol edilecek)
-    
+
     localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
 
     return user;
   },
 
-  logout()
-  {
+  logout() {
     localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
   },
 
-  getCurrentUser()
-  {
+  getCurrentUser() {
     const userStr = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
 
     return userStr ? JSON.parse(userStr) : null;
   },
 
-  getAllUsers()
-  {
+  getAllUsers() {
     const usersStr = localStorage.getItem(STORAGE_KEYS.USERS);
 
     return usersStr ? JSON.parse(usersStr) : [];
   },
 
-  isAuthenticated()
-  {
+  isAuthenticated() {
     return !!this.getCurrentUser();
   },
 };

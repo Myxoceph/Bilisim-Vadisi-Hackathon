@@ -1,12 +1,14 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export default function ProtectedRoute({ children, vetOnly = false, customerOnly = false }) {
-
+export default function ProtectedRoute({
+  children,
+  vetOnly = false,
+  customerOnly = false,
+}) {
   const { user, loading } = useAuth();
 
-  if (loading)
-  {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -17,13 +19,12 @@ export default function ProtectedRoute({ children, vetOnly = false, customerOnly
     );
   }
 
-  if (!user)
-    return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/login" replace />;
 
-  if (vetOnly && user.userType !== 'vet')
+  if (vetOnly && user.userType !== "vet")
     return <Navigate to="/dashboard" replace />;
 
-  if (customerOnly && user.userType !== 'customer')
+  if (customerOnly && user.userType !== "customer")
     return <Navigate to="/dashboard" replace />;
 
   return children;

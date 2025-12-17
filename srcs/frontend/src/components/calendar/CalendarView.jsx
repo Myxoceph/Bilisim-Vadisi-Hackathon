@@ -1,11 +1,15 @@
-import { useState, useMemo } from 'react';
-import CalendarHeader from './CalendarHeader';
-import DayCell from './DayCell';
+import { useState, useMemo } from "react";
+import CalendarHeader from "./CalendarHeader";
+import DayCell from "./DayCell";
 
-export default function CalendarView({ appointments = [], onDayClick, unavailableDates = [] }) {
+export default function CalendarView({
+  appointments = [],
+  onDayClick,
+  unavailableDates = [],
+}) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const calendarDays = useMemo(() => {
     const year = currentDate.getFullYear();
@@ -23,25 +27,25 @@ export default function CalendarView({ appointments = [], onDayClick, unavailabl
 
     for (let i = startPadding - 1; i >= 0; i--) {
       days.push({
-          day: prevMonthDays - i,
-          isCurrentMonth: false,
-          date: new Date(year, month - 1, prevMonthDays - i)
+        day: prevMonthDays - i,
+        isCurrentMonth: false,
+        date: new Date(year, month - 1, prevMonthDays - i),
       });
     }
 
     for (let i = 1; i <= lastDay.getDate(); i++) {
       days.push({
-          day: i,
-          isCurrentMonth: true,
-          date: new Date(year, month, i)
+        day: i,
+        isCurrentMonth: true,
+        date: new Date(year, month, i),
       });
     }
 
     for (let i = 1; i <= endPadding; i++) {
       days.push({
-          day: i,
-          isCurrentMonth: false,
-          date: new Date(year, month + 1, i)
+        day: i,
+        isCurrentMonth: false,
+        date: new Date(year, month + 1, i),
       });
     }
 
@@ -51,25 +55,29 @@ export default function CalendarView({ appointments = [], onDayClick, unavailabl
   const today = new Date();
 
   const isToday = (date) => {
-      return date.toDateString() === today.toDateString();
-  }
+    return date.toDateString() === today.toDateString();
+  };
 
   const getAppointmentsForDay = (date) => {
-    const dateStr = date.toISOString().split('T')[0];
-      return unavailableDates.includes(dateStr);
+    const dateStr = date.toISOString().split("T")[0];
+    return unavailableDates.includes(dateStr);
   };
 
   const isUnavailable = (date) => {
-    const dateStr = date.toISOString().split('T')[0];
-      return unavailableDates.includes(dateStr);
+    const dateStr = date.toISOString().split("T")[0];
+    return unavailableDates.includes(dateStr);
   };
 
   const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1)
+    );
   };
 
   const handleNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)
+    );
   };
 
   const handleToday = () => {
@@ -105,7 +113,9 @@ export default function CalendarView({ appointments = [], onDayClick, unavailabl
             isToday={isToday(dayInfo.date)}
             isCurrentMonth={dayInfo.isCurrentMonth}
             isAvailable={!isUnavailable(dayInfo.date)}
-            onClick={() => onDayClick(dayInfo.date, getAppointmentsForDay(dayInfo.date))}
+            onClick={() =>
+              onDayClick(dayInfo.date, getAppointmentsForDay(dayInfo.date))
+            }
           />
         ))}
       </div>
@@ -125,5 +135,5 @@ export default function CalendarView({ appointments = [], onDayClick, unavailabl
         </div>
       </div>
     </div>
-    );
+  );
 }

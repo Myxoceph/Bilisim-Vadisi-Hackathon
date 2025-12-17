@@ -13,10 +13,12 @@ export default function AppointmentCard({ appointment }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="text-center bg-gradient-to-br from-secondary/10 to-primary/10 p-3 rounded-lg">
-            <p className="text-lg font-bold text-primary">{time.split(':')[0]}</p>
-            <p className="text-xs text-gray-600">{time.split(':')[1]}</p>
+            <p className="text-lg font-bold text-primary">
+              {time.split(":")[0]}
+            </p>
+            <p className="text-xs text-gray-600">{time.split(":")[1]}</p>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-gray-800">{petName}</h3>
             <p className="text-sm text-gray-600">{ownerName}</p>
@@ -24,7 +26,9 @@ export default function AppointmentCard({ appointment }) {
           </div>
         </div>
 
-        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[status]}`}>
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[status]}`}
+        >
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </span>
       </div>
