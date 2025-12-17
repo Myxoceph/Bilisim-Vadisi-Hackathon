@@ -55,8 +55,8 @@ services:
     container_name: gateway
     build: ./gateway
     restart: on-failure
-    ports:
-      - "3001:3001"
+    expose:
+      - 3001
     volumes:
       - gateway_src:/app
       - /app/node_modules
@@ -69,8 +69,8 @@ services:
     container_name: auth
     build: ./auth
     restart: on-failure
-    ports:
-      - "3002:3002"
+    expose:
+      - 3002
     networks:
       - backend_network
     volumes:
@@ -84,6 +84,15 @@ services:
     environment:
       DATABASE_URL: postgresql://admin:adminpassword@postgres:5432/auth_db
       REDIS_URL: redis://redis:6379
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: on-failure
+    ports:
+      - "443:443"
+    depends_on:
+      - gateway
 
 #  user:
 #    container_name: user
