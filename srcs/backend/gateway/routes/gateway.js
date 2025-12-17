@@ -15,7 +15,7 @@ function sanitizeObject(obj) {
 	return out
 }
  */
-async function processRequest(fastify, request, reply)
+async function processRequest(request, reply)
 {
     return reply.code(200).send({ echo: "ok"})
 }

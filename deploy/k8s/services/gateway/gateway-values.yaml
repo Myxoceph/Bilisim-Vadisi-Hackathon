@@ -1,33 +1,26 @@
-appName: gateway-service
-
-deployment:
-  name: gateway-service
-  labels:
-    app: gateway-service
-  replicas: 2
-  containerName: gateway-app
-  containerPort: 8080
+# Gateway Service Values
+replicaCount: 2
 
 image:
-  repository: myrepo/gateway-service
-  tag: "v1.0.0"
-  pullPolicy: IfNotPresent
+  repository: uby0/backend-gateway
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "gateway-service"
 
 service:
-  name: gateway-service
-  type: LoadBalancer    # Gateway dışarıya açık olmalı mı? #nginx?
-  port: 80              # Cluster içi
-  targetPort: 8080      # Container portu
-  protocol: TCP
+  type: ClusterIP
+  port: 3001
 
-hpa:
+autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 10
-  CPUTarget: 70
-  MemoryTarget: 80
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
 
-resources: #?
+resources:
   requests:
     cpu: "200m"
     memory: "128Mi"
@@ -35,8 +28,8 @@ resources: #?
     cpu: "500m"
     memory: "512Mi"
 
-env:
-  APP_ENV: production
-  LOG_LEVEL: info
-  AUTH_SERVICE_URL: http://auth-service:80
-  RATE_LIMIT: "100"
+# env:
+#   APP_ENV: production
+#   LOG_LEVEL: info
+#   AUTH_SERVICE_URL: http://auth-service:80
+#   RATE_LIMIT: "100"

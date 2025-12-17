@@ -1,38 +1,31 @@
-appName: appointment-service
-
-deployment:
-  name: appointment-service
-  labels:
-    app: appointment-service
-  replicas: 2
-  containerName: appointment-app
-  containerPort: 7000
+# Appointment Service Values
+replicaCount: 2
 
 image:
-  repository: myrepo/appointment-service #!
-  tag: "v1.0.0"
-  pullPolicy: IfNotPresent
+  repository: uby0/appointment-service
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "appointment-service"
 
 service:
-  name: appointment-service
   type: ClusterIP
-  port: 80              # Cluster içi
-  targetPort: 7000      # Container portu
-  protocol: TCP
+  port: 7000
 
-hpa:
+autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 10
-  CPUTarget: 70
-  MemoryTarget: 80
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
 
-resources: #?
+resources:
   requests:
     cpu: "150m"
     memory: "128Mi"
   limits:
-    cpu: "400m" # hpa varken doğru mu?
+    cpu: "400m"
     memory: "512Mi"
 
 # Environment variables (?)

@@ -3,7 +3,7 @@ volumes:
    driver: local
    driver_opts:
      type: none
-     device: ./backend/gateway
+     device: ./gateway
      o: bind
   nginx_src:
    driver: local
@@ -15,7 +15,7 @@ volumes:
 services:
   gateway:
     container_name: gateway
-    build: ./backend/gateway
+    build: ./gateway
     restart: on-failure
     ports:
       - "3001:3001"

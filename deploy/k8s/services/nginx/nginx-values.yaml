@@ -1,25 +1,22 @@
-appName: nginx-service
+# Nginx Service Values
+replicaCount: 2
 
 image:
-  repository: nginx
-  tag: latest #!
-  pullPolicy: IfNotPresent
+  repository: uby0/backend-nginx
+  tag: "latest"
+  pullPolicy: Never
 
-deployment:
-  name: nginx-deployment
-  labels:
-    app: nginx-app
-  replicas: 2
-  containerName: nginx-container
-  containerPort: 3131
+nameOverride: ""
+fullnameOverride: "nginx-service"
 
 service:
-  name: nginx-service
   type: LoadBalancer
   port: 3131
-  targetPort: 3131
 
-resources: #?
+autoscaling:
+  enabled: false
+
+resources:
   requests:
     cpu: "100m"
     memory: "128Mi"

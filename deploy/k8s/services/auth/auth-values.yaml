@@ -1,33 +1,26 @@
-appName: auth-service
-
-deployment:
-  name: auth-service
-  labels:
-    app: auth-service
-  replicas: 2
-  containerName: auth-app
-  containerPort: 5000
+# Auth Service Values
+replicaCount: 2
 
 image:
-  repository: myrepo/auth-service
-  tag: "v1.0.0"
-  pullPolicy: IfNotPresent
+  repository: uby0/auth-service
+  tag: "latest"
+  pullPolicy: Never
+
+nameOverride: ""
+fullnameOverride: "auth-service"
 
 service:
-  name: auth-service
-  type: ClusterIP #?
-  port: 80              # Cluster içindeki port
-  targetPort: 5000      # Container portu
-  protocol: TCP
+  type: ClusterIP
+  port: 5000
 
-hpa:
+autoscaling:
   enabled: true
-  minReplicas: 3        
+  minReplicas: 3
   maxReplicas: 10
-  CPUTarget: 60
-  MemoryTarget: 80
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 80
 
-resources: #?
+resources:
   requests:
     cpu: "100m"
     memory: "64Mi"
@@ -35,8 +28,8 @@ resources: #?
     cpu: "300m"
     memory: "256Mi"
 
-env:
-  APP_ENV: production
-  LOG_LEVEL: info
+# env:
+#   APP_ENV: production
+#   LOG_LEVEL: info
 
-#secrets: (?)
+# secrets: (?)
