@@ -37,8 +37,9 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <div className='min-h-screen bg-primary'>  
-            <section className='h-screen relative'>
+        <main className='min-h-screen bg-primary'>
+            <section className='h-screen relative' aria-label="Veterinary Map and Registration">
+                <h1 className="sr-only">Find Veterinarians Near Me</h1>
                 <div className='absolute inset-0 z-0'>
                     {userLocation && (
                         <MapContainer center={[userLocation[0], userLocation[1] - 0.008]} zoom={15} className="h-full w-full">
@@ -76,9 +77,9 @@ export default function LandingPage() {
                 {/* Left Panel - Glassmorphism Style */}
                 <div className="absolute top-0 left-0 h-full w-96 bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-md shadow-2xl p-8 z-10 border-r border-gray-200/50">
                     <div className="animate-fade-in">
-                        <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4 leading-tight">
+                        <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4 leading-tight">
                             Find the Nearest Veterinarian
-                        </h1>
+                        </h2>
                         <p className="text-gray-700 mb-8 text-lg leading-relaxed">
                             Book an appointment in seconds with trusted veterinarians near you.
                         </p>
@@ -116,55 +117,18 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* How It Works Section */}
-            <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+            <section className="py-20 bg-gradient-to-b from-white to-gray-50" aria-labelledby="testimonials">
                 <div className="max-w-7xl mx-auto px-4">
-                <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
-                    How It Works?
-                </h2>
-                <p className="text-center text-gray-600 mb-16 text-lg">Get started in three simple steps</p>
-                
-                <div className="grid md:grid-cols-3 gap-8">
-                    <div className="group text-center bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-                    <div className="w-20 h-20 bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <span className="text-white text-3xl">📍</span>
-                    </div>
-                    <h3 className="font-bold text-xl mb-3 text-gray-800">Select Your Location</h3>
-                    <p className="text-gray-600 leading-relaxed">Mark your location on the map or enter an address to find nearby clinics</p>
-                    </div>
-                    
-                    <div className="group text-center bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <span className="text-white text-3xl">🏥</span>
-                    </div>
-                    <h3 className="font-bold text-xl mb-3 text-gray-800">View Veterinarians</h3>
-                    <p className="text-gray-600 leading-relaxed">Discover available veterinarians near you with real-time availability</p>
-                    </div>
-                    
-                    <div className="group text-center bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-                    <div className="w-20 h-20 bg-gradient-to-br from-secondary to-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <span className="text-white text-3xl">✅</span>
-                    </div>
-                    <h3 className="font-bold text-xl mb-3 text-gray-800">Book an Appointment</h3>
-                    <p className="text-gray-600 leading-relaxed">Create your appointment with a single click and get instant confirmation</p>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-            {/* Testimonials Section */}
-            <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-                <div className="max-w-7xl mx-auto px-4">
-                <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
+                <h2 id="testimonials" className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
                     What Our Users Say
                 </h2>
                 <p className="text-center text-gray-600 mb-16 text-lg">Trusted by thousands of pet owners and veterinarians</p>
                 
                 <div className="grid md:grid-cols-3 gap-8">
                     {[1, 2, 3].map((i) => (
-                    <div key={i} className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+                    <article key={i} className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
                         <div className="flex items-center mb-6">
-                        <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full mr-4 flex items-center justify-center text-2xl">🐾</div>
+                        <div className="w-14 h-14 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full mr-4 flex items-center justify-center text-2xl" aria-hidden="true">🐾</div>
                         <div>
                             <p className="font-bold text-lg text-gray-800">Yigit T.</p>
                             <p className="text-sm text-gray-500">Pet Owner</p>
@@ -174,14 +138,14 @@ export default function LandingPage() {
                         "Great platform! I was able to quickly book an appointment in emergencies. The interface is intuitive and the service is reliable."
                         </p>
                         <div className="flex items-center">
-                            <div className="text-yellow-400 text-lg">★★★★★</div>
+                            <div className="text-yellow-400 text-lg" aria-label="5 star rating">★★★★★</div>
                             <span className="text-sm text-gray-500 ml-2">5.0</span>
                         </div>
-                    </div>
+                    </article>
                     ))}
                 </div>
                 </div>   
             </section>
-        </div>
+        </main>
     )
 }
